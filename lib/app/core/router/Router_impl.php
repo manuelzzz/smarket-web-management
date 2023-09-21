@@ -24,12 +24,17 @@ class Router extends RouteSwitch
     {
         require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/edit/edit.php';
     }
+    public function insert()
+    {
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/insert/insert.php';
+    }
 
     public function __call($name, $arguments)
     {
         http_response_code(404);
         require $_SERVER['DOCUMENT_ROOT'] . 'lib/app/core/exceptions/404.php';
     }
+
 }
 
 ?>
