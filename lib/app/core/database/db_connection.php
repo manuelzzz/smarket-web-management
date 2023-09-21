@@ -8,12 +8,12 @@ class DBConnection
     public $user;
     public $password;
 
-    public function __construct($hostname, $dbname, $user, $password)
+    public function __construct()
     {
-        $this->hostname = $hostname;
-        $this->database = $dbname;
-        $this->user = $user;
-        $this->password = $password;
+        $this->hostname = 'localhost';
+        $this->database = 'smarket';
+        $this->user = 'root';
+        $this->password = 'mysql';
     }
 
     public function openConnection()
