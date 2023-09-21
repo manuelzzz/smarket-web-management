@@ -8,12 +8,12 @@ class DBConnection
     public $user;
     public $password;
 
-    public function __construct()
+    public function __construct($hostname, $dbname, $user, $password)
     {
-        $this->hostname = 'server ip address';
-        $this->database = 'database name';
-        $this->user = 'user to be used in connection';
-        $this->password = 'password that matchs with user';
+        $this->hostname = $hostname;
+        $this->database = $dbname;
+        $this->user = $user;
+        $this->password = $password;
     }
 
     public function openConnection()
