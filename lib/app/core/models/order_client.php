@@ -27,8 +27,6 @@ class OrderClient
         $this->products = $products;
         $this->generalTotal = $generalTotal;
     }
-
-
 }
 
 ?>
