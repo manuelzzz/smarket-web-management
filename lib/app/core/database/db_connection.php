@@ -1,6 +1,6 @@
 <?php
 
-class DbConnection
+class DBConnection
 {
     public static $pdo;
     public $hostname;
