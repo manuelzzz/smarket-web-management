@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/Router.php';
 
-class Router extends RouteSwitch
+class Router extends RouteSwitchImpl
 {
     public function run(string $request_uri)
     {
