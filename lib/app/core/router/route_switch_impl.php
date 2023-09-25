@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/Router.php';
+require_once 'route_switch.php';
 
-class Router extends RouteSwitchImpl
+class RouteSwitchImpl extends RouteSwitch
 {
     public function run(string $request_uri)
     {
@@ -34,7 +34,6 @@ class Router extends RouteSwitchImpl
         http_response_code(404);
         require $_SERVER['DOCUMENT_ROOT'] . 'lib/app/core/exceptions/404.php';
     }
-
 }
 
 ?>
