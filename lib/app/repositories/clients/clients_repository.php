@@ -1,7 +1,4 @@
 <?php
-
-require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/models/order_client.php');
-
 abstract class ClientsRepository
 {
     private $db;

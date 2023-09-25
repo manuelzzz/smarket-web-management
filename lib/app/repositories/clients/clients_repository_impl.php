@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/clients_repository.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/database/db_connection.php');
 
 class ClientsRepositoryImpl extends ClientsRepository
 {
@@ -7,7 +9,6 @@ class ClientsRepositoryImpl extends ClientsRepository
 
     public function __construct()
     {
-        require_once('/clients_repository.php');
         $this->db = new DBConnection();
     }
 
@@ -23,10 +24,10 @@ class ClientsRepositoryImpl extends ClientsRepository
             if ($queryRes->rowCount() >= 1) {
                 return $queryRes;
             } else {
-                return FALSE;
+                return false;
             }
         } catch (Exception $error) {
-            die("Error in get clients " . $error->getMessage());
+            throw new Exception("Error in get clients on repository class " . $error->getMessage());
         }
     }
 
