@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/clients_repository.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/database/db_connection.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/database/db_connection.php');
 
 class ClientsRepositoryImpl extends ClientsRepository
 {
@@ -45,6 +45,16 @@ class ClientsRepositoryImpl extends ClientsRepository
     public function removeClient(
         OrderClient $client,
     ) {
+        try {
+            $query = "DELETE FROM clients WHERE RG=$client->RG";
+
+            $queryRes = $this->db->openConnection()->prepare($query);
+            $queryRes->execute();
+
+            return true;
+        } catch (Exception $error) {
+            throw new Exception("Error in delete client on repository class " . $error->getMessage());
+        }
     }
 }
 
