@@ -32,7 +32,7 @@ class RouteSwitchImpl extends RouteSwitch
     public function __call($name, $arguments)
     {
         http_response_code(404);
-        require $_SERVER['DOCUMENT_ROOT'] . 'lib/app/core/exceptions/404.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/exceptions/404.php';
     }
 }
 
