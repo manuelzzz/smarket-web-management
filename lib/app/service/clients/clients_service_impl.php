@@ -22,9 +22,9 @@ class ClientsServiceImpl extends ClientsService
             if ($stmt != false) {
                 while ($row = $stmt->fetch()) {
                     $atualClient = new OrderClient(
-                        orderIndex: $row["NUM_PED"],
+                        orderCod: $row["NUM_PED"],
                         date: $row["DATA"],
-                        clientIndex: $row["COD_CLI"],
+                        clientCod: $row["COD_CLI"],
                         client: $row["CLIENTE"],
                         address: $row["ENDERECO"],
                         RG: $row["RG"],
@@ -54,8 +54,10 @@ class ClientsServiceImpl extends ClientsService
     public function remove(
         OrderClient $client,
     ) {
-    }
+        $stmt = $this->clientsRepositoryImpl->removeClient($client);
 
+        return $stmt == true ? true : false;
+    }
 }
 
 ?>
