@@ -1,10 +1,15 @@
 <?php
 
-require_once __DIR__ . '/app/core/router/Router_impl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . "/lib/app/core/router/route_switch_impl.php";
 
-$requestUri = $_SERVER['REQUEST_URI'];
+try {
+    $requestUri = $_SERVER['REQUEST_URI'];
 
-$router = new Router;
-$router->run($requestUri);
+    $router = new RouteSwitchImpl();
+    $router->run($requestUri);
+} catch (Error $e) {
+    echo "Error: " . $e->getMEssage();
+    die("Error in index" . $e);
+}
 
 ?>
