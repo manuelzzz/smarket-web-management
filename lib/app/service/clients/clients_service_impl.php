@@ -15,9 +15,14 @@ class ClientsServiceImpl extends ClientsService
     public function get()
     {
         try {
-            $clients = $this->clientsRepositoryImpl->getClients();
+            $stmt = $this->clientsRepositoryImpl->getClients();
+            $clients = array();
 
-            if ($clients != false) {
+            if ($stmt != false) {
+                while ($row = $stmt->fetch()) {
+                    array_push($clients, $row);
+                }
+
                 return $clients;
             } else {
                 return null;
