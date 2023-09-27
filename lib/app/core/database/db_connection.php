@@ -24,6 +24,7 @@ class DBConnection
                 $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
 
                 static::$pdo = new PDO($dsn, $this->user, $this->password, $options);
+                return static::$pdo;
             }
         } catch (PDOException $PDOerror) {
             die("Erro ao realizar a conexão com o banco de dados (PDO exception) " . $PDOerror->getMessage());
