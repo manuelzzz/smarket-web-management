@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . '/clients_service.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/repositories/clients/clients_repository_impl.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/models/order_client.php');
 
 class ClientsServiceImpl extends ClientsService
 {
@@ -20,7 +21,17 @@ class ClientsServiceImpl extends ClientsService
 
             if ($stmt != false) {
                 while ($row = $stmt->fetch()) {
-                    array_push($clients, $row);
+                    $atualClient = new OrderClient(
+                        orderIndex: $row["NUM_PED"],
+                        date: $row["DATA"],
+                        clientIndex: $row["COD_CLI"],
+                        client: $row["CLIENTE"],
+                        address: $row["ENDERECO"],
+                        RG: $row["RG"],
+                        generalTotal: $row["TOTAL_GERAL"],
+                    );
+
+                    array_push($clients, $atualClient);
                 }
 
                 return $clients;
