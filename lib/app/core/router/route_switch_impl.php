@@ -8,7 +8,7 @@ class RouteSwitchImpl extends RouteSwitch
     {
         $route = substr($request_uri, 1);
 
-        if ($route == '') {
+        if ($route == '' || $route == '/') {
             $this->home();
         } else {
             $this->$route();
