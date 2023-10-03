@@ -45,6 +45,13 @@ class ClientsServiceImpl extends ClientsService
     public function insert(
         OrderClient $client,
     ) {
+        try {
+            $stmt = $this->clientsRepositoryImpl->insertClient($client);
+
+            return ($stmt == true) ? true : false;
+        } catch (Exception $error) {
+            throw new Exception("Error in insert on service class " . $error->getMessage());
+        }
     }
     public function update(
         OrderClient $oldClient,
