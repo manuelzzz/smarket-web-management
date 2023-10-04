@@ -10,6 +10,8 @@ class RouteSwitchImpl extends RouteSwitch
 
         if ($route == '' || $route == '/') {
             $this->home();
+        } else if (str_contains($route, "edit")) {
+            $this->edit();
         } else {
             $this->$route();
         }
