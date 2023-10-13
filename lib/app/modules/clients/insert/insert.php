@@ -6,7 +6,7 @@ $errorMessage = "";
 $successMessage = "";
 
 try {
-    $clients_service_impl = new ClientsServiceImpl();
+    $clientsServiceImpl = new ClientsServiceImpl();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST["id"];
@@ -35,7 +35,7 @@ try {
                 break;
             }
 
-            $response = $clients_service_impl->insert($clientAdd);
+            $response = $clientsServiceImpl->insert($clientAdd);
 
             if ($response) {
                 $successMessage = "Sucesso ao inserir cliente";
@@ -93,6 +93,12 @@ try {
             }
             ?>
             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Numero do pedido</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" name="num_ped" value="" />
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">ID</label>
                 <div class="col-sm-6">
                     <input type="number" class="form-control" name="id" value="" />
@@ -102,12 +108,6 @@ try {
                 <label class="col-sm-3 col-form-label">Nome</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="nome" value="" />
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Numero do pedido</label>
-                <div class="col-sm-6">
-                    <input type="number" class="form-control" name="num_ped" value="" />
                 </div>
             </div>
             <div class="row mb-3">

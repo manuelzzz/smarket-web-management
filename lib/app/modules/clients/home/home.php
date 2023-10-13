@@ -16,9 +16,9 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Numero do pedido</th>
                     <th>ID</th>
                     <th>Nome</th>
-                    <th>Numero do pedido</th>
                     <th>Data</th>
                     <th>Endereço</th>
                     <th>RG</th>
@@ -31,23 +31,23 @@
                 require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/app/service/clients/clients_service_impl.php';
 
                 try {
-                    $clients_service_impl = new ClientsServiceImpl();
-                    $clientes = $clients_service_impl->get();
+                    $clientsServiceImpl = new ClientsServiceImpl();
+                    $clientes = $clientsServiceImpl->getClients();
 
                     for ($i = 0; $i < count($clientes); $i++) {
                         $cliente = $clientes[$i];
 
                         echo "<tr>
+                        <td> $cliente->orderCod </td>
                         <td> $cliente->clientCod </td>
                         <td> $cliente->client </td>
-                        <td> $cliente->orderCod </td>
                         <td> $cliente->date </td>
                         <td> $cliente->address </td>
                         <td> $cliente->RG </td>
                         <td>R$ $cliente->generalTotal </td>
                         <td>
-                            <a class='btn btn-primary btn-sm' role='button' href='/edit'>Editar</a>
-                            <a class='btn btn-danger btn-sm' role='button' href='/delete'>Deletar</a>
+                            <a class='btn btn-primary btn-sm' role='button' href='/edit?pedido=$cliente->orderCod'>Editar</a>
+                            <a class='btn btn-danger btn-sm' role='button' href='/delete?pedido=$cliente->orderCod'>Deletar</a>
                         </td>
                     </tr>";
                     }
