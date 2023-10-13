@@ -4,6 +4,9 @@ abstract class ClientsRepository
     private $db;
 
     abstract public function getClients();
+    abstract public function getClientById(
+        $id,
+    );
     abstract public function insertClient(
         OrderClient $client,
     );
@@ -11,8 +14,8 @@ abstract class ClientsRepository
         OrderClient $oldClient,
         OrderClient $newClient,
     );
-    abstract public function removeClient(
-        OrderClient $client,
+    abstract public function removeClientById(
+        $id,
     );
 }
 

@@ -1,5 +1,4 @@
 <?php
-
 require_once(__DIR__ . '/clients_repository.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/utils/date_format.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/database/db_connection.php');
@@ -11,8 +10,8 @@ class ClientsRepositoryImpl extends ClientsRepository
 
     public function __construct()
     {
-        $this->dateFormatter = new DateFormat();
         $this->db = new DBConnection();
+        $this->dateFormatter = new DateFormat();
     }
 
     public function getClients()
@@ -31,6 +30,26 @@ class ClientsRepositoryImpl extends ClientsRepository
             }
         } catch (Exception $error) {
             throw new Exception("Error in get clients on repository class " . $error->getMessage());
+        }
+    }
+
+    public function getClientById(
+        $id,
+    ) {
+        try {
+            $query = "SELECT * FROM `clients` WHERE NUM_PED=$id";
+
+            $queryRes = $this->db->openConnection()->prepare($query);
+            $queryRes->execute();
+            $queryRes->setFetchMode(PDO::FETCH_ASSOC);
+
+            if ($queryRes->rowCount() >= 1) {
+                return $queryRes;
+            } else {
+                return false;
+            }
+        } catch (Exception $error) {
+            throw new Exception("Error in get client on repository class " . $error->getMessage());
         }
     }
 
@@ -64,13 +83,41 @@ class ClientsRepositoryImpl extends ClientsRepository
         OrderClient $oldClient,
         OrderClient $newClient,
     ) {
+        try {
+            if ($oldClient == $newClient) {
+                return true;
+            }
+
+            $newDate = $this->dateFormatter->format($newClient->date);
+
+            $query = "UPDATE `clients`
+                    SET
+                    DATA=STR_TO_DATE('$newDate', '%d-%m-%Y'),
+                    COD_CLI=$newClient->clientCod,
+                    CLIENTE='$newClient->client',
+                    ENDERECO='$newClient->address',
+                    RG='$newClient->RG',
+                    TOTAL_GERAL=$newClient->generalTotal
+                    WHERE
+                    NUM_PED=$oldClient->orderCod";
+
+            echo $query;
+
+            $queryRes = $this->db->openConnection()->prepare($query);
+            $queryRes->execute();
+            $queryRes->setFetchMode(PDO::FETCH_ASSOC);
+
+            return true;
+        } catch (Exception $error) {
+            throw new Exception("Error in update client on repository class " . $error->getMessage());
+        }
     }
 
-    public function removeClient(
-        OrderClient $client,
+    public function removeClientById(
+        $id,
     ) {
         try {
-            $query = "DELETE FROM `clients` WHERE RG=$client->RG";
+            $query = "DELETE FROM `clients` WHERE NUM_PED=$id";
 
             $queryRes = $this->db->openConnection()->prepare($query);
             $queryRes->execute();
@@ -81,5 +128,4 @@ class ClientsRepositoryImpl extends ClientsRepository
         }
     }
 }
-
 ?>
