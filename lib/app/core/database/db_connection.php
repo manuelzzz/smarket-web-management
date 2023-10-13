@@ -1,5 +1,4 @@
 <?php
-
 class DBConnection
 {
     public static $pdo;
@@ -19,6 +18,8 @@ class DBConnection
     public function openConnection()
     {
         try {
+            static::$pdo = null;
+
             if (!static::$pdo) {
                 $dsn = 'mysql:host=' . $this->hostname . ';dbname=' . $this->database;
                 $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
@@ -32,7 +33,5 @@ class DBConnection
             die("Erro ao realizar a conexão com o banco de dados (General exception) " . $error->getMessage());
         }
     }
-
 }
-
 ?>
