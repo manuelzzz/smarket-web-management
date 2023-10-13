@@ -12,6 +12,8 @@ class RouteSwitchImpl extends RouteSwitch
             $this->home();
         } else if (str_contains($route, "edit")) {
             $this->edit();
+        } else if (str_contains($route, "delete")) {
+            $this->delete();
         } else {
             $this->$route();
         }
@@ -19,16 +21,20 @@ class RouteSwitchImpl extends RouteSwitch
 
     public function home()
     {
-        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/home/home.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/clients/home/home.php';
     }
 
     public function edit()
     {
-        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/edit/edit.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/clients/edit/edit.php';
     }
     public function insert()
     {
-        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/insert/insert.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/clients/insert/insert.php';
+    }
+    public function delete()
+    {
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/clients/delete/delete.php';
     }
 
     public function __call($name, $arguments)
