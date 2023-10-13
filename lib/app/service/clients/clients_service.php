@@ -4,7 +4,10 @@ abstract class ClientsService
 {
     private $clientsRepositoryImpl;
 
-    abstract function get();
+    abstract function getClients();
+    abstract function getClientById(
+        $id,
+    );
     abstract function insert(
         OrderClient $client,
     );
@@ -12,8 +15,8 @@ abstract class ClientsService
         OrderClient $oldClient,
         OrderClient $newClient,
     );
-    abstract function remove(
-        OrderClient $client,
+    abstract function removeById(
+        $id,
     );
 }
 

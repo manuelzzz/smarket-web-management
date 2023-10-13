@@ -13,7 +13,7 @@ class ClientsServiceImpl extends ClientsService
         $this->clientsRepositoryImpl = new ClientsRepositoryImpl();
     }
 
-    public function get()
+    public function getClients()
     {
         try {
             $stmt = $this->clientsRepositoryImpl->getClients();
@@ -42,6 +42,32 @@ class ClientsServiceImpl extends ClientsService
             throw new Exception("Error in get clients on service class " . $error->getMessage());
         }
     }
+    public function getClientById(
+        $id,
+    ) {
+        try {
+            $stmt = $this->clientsRepositoryImpl->getClientById($id);
+
+            if ($stmt != false) {
+                $data = $stmt->fetch();
+                $fetchClient = new OrderClient(
+                    orderCod: $data["NUM_PED"],
+                    date: $data["DATA"],
+                    clientCod: $data["COD_CLI"],
+                    client: $data["CLIENTE"],
+                    address: $data["ENDERECO"],
+                    RG: $data["RG"],
+                    generalTotal: $data["TOTAL_GERAL"],
+                );
+
+                return $fetchClient;
+            } else {
+                return null;
+            }
+        } catch (Exception $error) {
+            throw new Exception("Error in get client on service class " . $error->getMessage());
+        }
+    }
     public function insert(
         OrderClient $client,
     ) {
@@ -57,11 +83,21 @@ class ClientsServiceImpl extends ClientsService
         OrderClient $oldClient,
         OrderClient $newClient,
     ) {
+        try {
+            $stmt = $this->clientsRepositoryImpl->updateClient(
+                oldClient: $oldClient,
+                newClient: $newClient,
+            );
+
+            return ($stmt == true) ? true : false;
+        } catch (Exception $error) {
+            throw new Exception("Error in update on service class " . $error->getMessage());
+        }
     }
-    public function remove(
-        OrderClient $client,
+    public function removeById(
+        $id,
     ) {
-        $stmt = $this->clientsRepositoryImpl->removeClient($client);
+        $stmt = $this->clientsRepositoryImpl->removeClientById($id);
 
         return $stmt == true ? true : false;
     }
