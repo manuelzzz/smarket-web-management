@@ -1,32 +1,33 @@
 <?php
-
 class OrderClient
 {
-    public $orderIndex;
+    public $orderCod;
     public $date;
-    public $clientIndex;
+    public $clientCod;
+    public $client;
     public $address;
     public $RG;
     public array $products;
     public $generalTotal;
 
     public function __construct(
-        $orderIndex,
+        $orderCod,
         $date,
-        $clientIndex,
+        $clientCod,
+        $client,
         $address,
         $RG,
-        $products,
+        // $products,
         $generalTotal,
     ) {
-        $this->orderIndex = $orderIndex;
+        $this->orderCod = $orderCod;
         $this->date = $date;
-        $this->clientIndex = $clientIndex;
+        $this->clientCod = $clientCod;
+        $this->client = $client;
         $this->address = $address;
         $this->RG = $RG;
-        $this->products = $products;
+        // $this->products = $products;
         $this->generalTotal = $generalTotal;
     }
 }
-
 ?>

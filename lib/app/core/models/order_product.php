@@ -2,12 +2,13 @@
 
 class OrderProduct
 {
-    protected $orderIndex;
-    protected $productCode;
-    protected $productDescription;
-    protected $quantity;
-    protected $price;
-    protected $subTotal;
+    public $orderIndex;
+    public $productCode;
+    public $productDescription;
+    public $quantity;
+    public $price;
+    public $subTotal;
+    public $generalTotal;
 
     public function __construct(
         $orderIndex,
@@ -16,6 +17,7 @@ class OrderProduct
         $quantity,
         $price,
         $subTotal,
+        $generalTotal,
     ) {
         $this->orderIndex = $orderIndex;
         $this->productCode = $productCode;
@@ -23,6 +25,7 @@ class OrderProduct
         $this->quantity = $quantity;
         $this->price = $price;
         $this->subTotal = $subTotal;
+        $this->generalTotal = $generalTotal;
     }
 }
 
