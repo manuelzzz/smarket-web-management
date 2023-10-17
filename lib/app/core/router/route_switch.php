@@ -6,6 +6,8 @@ abstract class RouteSwitch
     abstract protected function home();
     abstract protected function edit();
     abstract protected function insert();
+    abstract protected function orderHome();
+    abstract protected function orderInsert();
     abstract public function __call($name, $arguments);
 }
 

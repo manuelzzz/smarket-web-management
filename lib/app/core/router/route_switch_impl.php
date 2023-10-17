@@ -10,6 +10,10 @@ class RouteSwitchImpl extends RouteSwitch
 
         if ($route == '' || $route == '/') {
             $this->home();
+        } else if (str_contains($route, "pedidos/home")) {
+            $this->orderHome();
+        } else if (str_contains($route, "pedidos/insert")) {
+            $this->orderInsert();
         } else if (str_contains($route, "edit")) {
             $this->edit();
         } else if (str_contains($route, "delete")) {
@@ -35,6 +39,15 @@ class RouteSwitchImpl extends RouteSwitch
     public function delete()
     {
         require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/clients/delete/delete.php';
+    }
+
+    public function orderHome()
+    {
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/orders/home/home.php';
+    }
+    public function orderInsert()
+    {
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/orders/insert/insert.php';
     }
 
     public function __call($name, $arguments)
