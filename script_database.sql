@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
     `QUANT` int NOT NULL,
     `PRECO` float NOT NULL,
     `TOTAL` float as (`QUANT` * `PRECO`),
-    `TOTAL_GERAL` float NOT NULL
+    `TOTAL_GERAL` float NOT NULL,
+    UNIQUE(`COD_PROD`)
 );
 
 INSERT INTO
