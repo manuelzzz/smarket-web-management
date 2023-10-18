@@ -47,8 +47,6 @@ class OrdersRepositoryImpl extends OrdersRepository
             $product->price,
             $product->generalTotal)";
 
-            echo $query;
-
             $queryRes = $this->db->openConnection()->prepare($query);
             $queryRes->execute();
             $queryRes->setFetchMode(PDO::FETCH_ASSOC);
@@ -59,9 +57,20 @@ class OrdersRepositoryImpl extends OrdersRepository
         }
     }
 
-    function removeProductById(
-        $id
+    function removeProductByProductIndex(
+        $id,
+        $productIndex
     ) {
+        try {
+            $query = "DELETE FROM `orders` WHERE NUM_PED=$id AND COD_PROD=$productIndex";
+
+            $queryRes = $this->db->openConnection()->prepare($query);
+            $queryRes->execute();
+
+            return true;
+        } catch (Exception $error) {
+            throw new Exception("Error in delete order on repository class" . $error->getMessage());
+        }
     }
 }
 

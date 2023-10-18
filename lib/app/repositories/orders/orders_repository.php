@@ -12,8 +12,9 @@ abstract class ordersRepository
         OrderProduct $product
     );
 
-    abstract function removeProductById(
-        $id
+    abstract function removeProductByProductIndex(
+        $id,
+        $productIndex
     );
 }
 
