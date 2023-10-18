@@ -14,6 +14,8 @@ class RouteSwitchImpl extends RouteSwitch
             $this->orderHome();
         } else if (str_contains($route, "pedidos/insert")) {
             $this->orderInsert();
+        } else if (str_contains($route, "pedidos/delete")) {
+            $this->orderDelete();
         } else if (str_contains($route, "edit")) {
             $this->edit();
         } else if (str_contains($route, "delete")) {
@@ -48,6 +50,11 @@ class RouteSwitchImpl extends RouteSwitch
     public function orderInsert()
     {
         require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/orders/insert/insert.php';
+    }
+
+    public function orderDelete()
+    {
+        require $_SERVER['DOCUMENT_ROOT'] . '/lib/app/modules/orders/delete/delete.php';
     }
 
     public function __call($name, $arguments)
