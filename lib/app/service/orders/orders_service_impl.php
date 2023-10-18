@@ -1,12 +1,11 @@
 <?php
-
 require_once(__DIR__ . '/orders_service.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/repositories/orders/orders_repository_impl.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/lib/app/core/models/order_product.php');
 
 class OrdersServiceImpl extends OrdersService
 {
-    private $ordersRepositoryImpl;
+    private OrdersRepositoryImpl $ordersRepositoryImpl;
 
     public function __construct()
     {
@@ -55,11 +54,20 @@ class OrdersServiceImpl extends OrdersService
         }
     }
 
-    public function removeProductById(
-        $id
+    public function removeProduct(
+        $id,
+        $productIndex
     ) {
+        try {
+            $stmt = $this->ordersRepositoryImpl->removeProductByProductIndex(
+                id: $id,
+                productIndex: $productIndex,
+            );
 
+            return ($stmt == true) ? true : false;
+        } catch (Exception $error) {
+            throw new Exception("Error in delete product on service class " . $error->getMessage());
+        }
     }
 }
-
 ?>
