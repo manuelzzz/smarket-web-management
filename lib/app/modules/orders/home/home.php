@@ -77,7 +77,7 @@
                                 <td> R$ $product->price </td>
                                 <td> R$ $product->subTotal </td>
                                 <td>
-                                <a class='btn btn-danger btn-sm' role='button' href='pedidos/delete?pedido=$product->orderIndex?produto=$product->productCode' title='Deletar produto'><i class='bi bi-trash3'></i></a>
+                                <a class='btn btn-danger btn-sm' role='button' href='pedidos/delete?pedido=$product->orderIndex&produto=$product->productCode' title='Deletar produto'><i class='bi bi-trash3'></i></a>
                                 </td>
                                 </tr>";
                             }
