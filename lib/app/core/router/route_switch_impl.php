@@ -8,7 +8,7 @@ class RouteSwitchImpl extends RouteSwitch
     {
         $route = substr($request_uri, 1);
 
-        if ($route == '' || $route == '/') {
+        if ($route === '' || $route === '/') {
             $this->home();
         } else if (str_contains($route, "pedidos/home")) {
             $this->orderHome();
