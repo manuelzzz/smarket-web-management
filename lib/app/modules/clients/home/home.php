@@ -21,16 +21,6 @@ $errorMessage = "";
     <div class="container my-5">
         <h2>Clientes</h2>
         <a class="btn btn-primary btn-sm" role="button" href="/insert" title='Novo cliente'>Novo cliente</a>
-        <?php
-        if (!empty($errorMessage)) {
-            echo "
-            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                <strong>$errorMessage</strong>
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            </div>
-            ";
-        }
-        ?>
         <table class="table">
             <thead>
                 <tr>
@@ -51,6 +41,11 @@ $errorMessage = "";
                 try {
                     $clientsServiceImpl = new ClientsServiceImpl();
                     $clientes = $clientsServiceImpl->getClients();
+
+                    if ($clientes == null) {
+                        $errorMessage = "Não há clientes cadastrados";
+                        throw new Exception("Não há clientes cadastrados");
+                    }
 
                     for ($i = 0; $i < count($clientes); $i++) {
                         $cliente = $clientes[$i];
@@ -76,6 +71,16 @@ $errorMessage = "";
                 ?>
             </tbody>
         </table>
+        <?php
+        if (!empty($errorMessage)) {
+            echo "
+            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                <strong>$errorMessage</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+            ";
+        }
+        ?>
     </div>
 </body>
 
